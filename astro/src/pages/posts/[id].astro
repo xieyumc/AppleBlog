@@ -1,0 +1,111 @@
+---
+// 导入所需的模块和组件
+import MarkdownPost from "../../../src/layouts/MarkdownPostFor[id].astro";
+import { marked } from 'marked';
+
+// 获取文章 ID
+const { id } = Astro.params;
+
+// 初始化文章对象
+let post = {};
+
+// 格式化日期函数
+const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    return `${year} 年 ${month} 月 ${day} 日`;
+};
+const apiUrl = process.env.API_URL || 'http://127.0.0.1:8000/api/posts/';
+// 异步获取文章详情函数
+const fetchPost = async (id) => {
+    const response = await fetch(`${apiUrl}${id}/`);
+    return await response.json();
+};
+
+// 在服务器端获取文章详情
+if (import.meta.env.SSR) {
+    post = await fetchPost(id);
+    post.formatted_pub_date = formatDate(post.pub_date);
+}
+
+// 准备 frontmatter 对象
+const frontmatter = {
+    title: post.title,
+    pubDate: post.pub_date,
+    description: post.description,
+    featured: post.featured || false,
+    tags: post.tags ? post.tags.split(',') : [],
+    author: post.author,
+    theme: post.theme || 'light',
+    cover: { url: post.cover_url || '' },
+};
+
+const contentHtml = marked(post.content || '');
+---
+
+<MarkdownPost frontmatter={frontmatter}>
+    {post.featured && (
+            <div class="container body-copy-wide nr-scroll-animation nr-scroll-animation--on">
+                <img src={post.cover_url} alt="Background Image" class="background-image">
+                <div class="centered-text">{post.title}</div>
+                <div class="sub-text">{post.description}</div>
+            </div>
+    )}
+
+    <div class="tagssheet component">
+        <div class="component-content">
+            {frontmatter.tags.map(tag => (
+                    <a href={`/tags/${encodeURIComponent(tag.trim())}`} class="tag">
+                        {tag.trim()}
+                    </a>
+            ))}
+        </div>
+    </div>
+
+    <div class="tertiarynav component"><div class="component-content"></div></div>
+
+    <div class="TextMain" set:html={contentHtml} />
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const imgContainers = document.querySelectorAll('.img-container');
+
+            function isElementInViewport(el) {
+                const rect = el.getBoundingClientRect();
+                return (
+                    rect.top < (window.innerHeight || document.documentElement.clientHeight) &&
+                    rect.bottom > 0 &&
+                    rect.left >= 0 &&
+                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+                );
+            }
+
+            function checkAnimation() {
+                imgContainers.forEach(function(container) {
+                    if (isElementInViewport(container)) {
+                        container.classList.add('animate');
+                    }
+                });
+            }
+
+            function onScrollOrResize() {
+                checkAnimation();
+            }
+
+            window.addEventListener('scroll', onScrollOrResize);
+            window.addEventListener('resize', onScrollOrResize);
+
+            // 确保图片加载后立即检查
+            imgContainers.forEach(function(container) {
+                const img = container.querySelector('img');
+                if (img) {
+                    img.addEventListener('load', checkAnimation);
+                }
+            });
+
+            checkAnimation(); // 初始检查
+        });
+    </script>
+</MarkdownPost>

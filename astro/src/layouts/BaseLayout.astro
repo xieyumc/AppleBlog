@@ -1,0 +1,34 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_LANG} from "../consts";
+const { primaryTitle } = Astro.props;
+const title = primaryTitle ? `${primaryTitle}  -  ${SITE_TITLE}`  : SITE_TITLE;
+---
+
+<html class="js no-touch progressive-image no-reduced-motion progressive" lang={SITE_LANG} dir="ltr">
+<head>
+  <BaseHead title={title} description={SITE_DESCRIPTION} />
+  <script>
+    function updateTheme() {
+      if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('theme-dark');
+      } else {
+        document.body.classList.remove('theme-dark');
+      }
+    }
+
+    // 初始化时检查当前主题
+    updateTheme();
+
+    // 监听系统主题变化
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateTheme);
+  </script>
+</head>
+<body class="page-landing">
+<Header />
+<slot />
+<Footer />
+</body>
+</html>
