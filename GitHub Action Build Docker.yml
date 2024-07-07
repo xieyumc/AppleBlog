@@ -4,7 +4,7 @@ services:
 
 
   backend:
-    build: ../../Django
+    build: Django
     container_name: backend
     ports:
       - "8000:8000"
@@ -12,7 +12,7 @@ services:
       - my_network
 
   web:
-    build: ../../astro
+    build: astro
     container_name: web
     ports:
       - "3000:3000"
