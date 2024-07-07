@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    image: mona233/backend:latest
+    image: mona233/appleblog_backend:latest
     container_name: backend
     ports:
       - "8000:8000"
@@ -15,7 +15,7 @@ services:
 
 
   web:
-    image: mona233/web:latest
+    image: mona233/appleblog_web:latest
     container_name: web
     ports:
       - "3000:3000"
@@ -27,7 +27,7 @@ services:
       - API_URL=http://backend:8000/api/posts/
 
   nginx:
-    image: mona233/nginx:latest
+    image: mona233/appleblog_nginx:latest
     restart: always
     container_name: nginx
     ports:
@@ -46,7 +46,7 @@ services:
     container_name: watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
-    command: --interval 30 backend web nginx
+    command: --interval 60 backend web nginx
 
 networks:
   my_network:
