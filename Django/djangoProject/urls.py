@@ -16,11 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from user.views import RegisterView
-# backend/myproject/urls.py
+from WebConfig.views import web_config
+
+
 
 urlpatterns = [
     path('register/', RegisterView.as_view(), name='register'),
     path("admin/", admin.site.urls),
     path('api/', include('blog.urls')),
+
+    path('api/web_config', web_config, name='web_config'),
+
 ]
 

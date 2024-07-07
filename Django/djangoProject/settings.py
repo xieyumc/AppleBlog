@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'corsheaders',
     "blog.apps.BlogConfig",
     "rest_framework",
+    "WebConfig.apps.WebconfigConfig"
 ]
 
 MIDDLEWARE = [
