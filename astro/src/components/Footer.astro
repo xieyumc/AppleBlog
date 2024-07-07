@@ -1,22 +1,25 @@
 ---
 const { theme } = Astro.props;
 
-import { SITE_TITLE } from "../consts.js";
-import {SITE_DESCRIPTION} from "../consts.js";
+import { config } from '../consts.js';
 
-import {Footer1_Title} from "../consts.js";
-import { Footer1_Website1_title } from "../consts.js";
-import { Footer1_Website1_ulr} from "../consts.js";
-import { Footer1_Website2_title } from "../consts.js";
-import { Footer1_Website2_ulr} from "../consts.js";
+export const SITE_TITLE = config.SITE_TITLE;
+export const SITE_DESCRIPTION = config.SITE_DESCRIPTION;
 
-import {Footer2_Title} from "../consts.js";
-import { Footer2_Website1_title } from "../consts.js";
-import { Footer2_Website1_ulr} from "../consts.js";
+export const Footer1_Title = config.Footer1_Title;
+export const Footer1_Website1_title = config.Footer1_Website1_title;
+export const Footer1_Website1_url = config.Footer1_Website1_url;
+export const Footer1_Website2_title = config.Footer1_Website2_title;
+export const Footer1_Website2_url = config.Footer1_Website2_url;
 
-import {Footer3_Title} from "../consts.js";
-import { Footer3_Website1_title } from "../consts.js";
-import { Footer3_Website1_ulr} from "../consts.js";
+export const Footer2_Title = config.Footer2_Title;
+export const Footer2_Website1_title = config.Footer2_Website1_title;
+export const Footer2_Website1_url = config.Footer2_Website1_url;
+
+export const Footer3_Title = config.Footer3_Title;
+export const Footer3_Website1_title = config.Footer3_Website1_title;
+export const Footer3_Website1_url = config.Footer3_Website1_url;
+
 
 const date = new Date();
 const year = date.getFullYear();
@@ -35,20 +38,20 @@ const year = date.getFullYear();
 
           <div class="item products">
             <div class="item-title">{Footer1_Title}</div>
-            <a href={ Footer1_Website1_ulr } target="_blank">{Footer1_Website1_title}</a>
-            <a href={Footer1_Website2_ulr} target="_blank">{Footer1_Website2_title}</a>
+            <a href={ Footer1_Website1_url } target="_blank">{Footer1_Website1_title}</a>
+            <a href={Footer1_Website2_url} target="_blank">{Footer1_Website2_title}</a>
           </div>
 
           <div class="item community">
             <div class="item-title">{Footer2_Title}</div>
 
-            <a href={ Footer2_Website1_ulr} target="_blank">{ Footer2_Website1_title }</a>
+            <a href={ Footer2_Website1_url} target="_blank">{ Footer2_Website1_title }</a>
 
           </div>
           
           <div class="item resources">
             <div class="item-title">{Footer3_Title}</div>
-            <a href={ Footer3_Website1_ulr} target="_blank">{ Footer3_Website1_title }</a>
+            <a href={ Footer3_Website1_url} target="_blank">{ Footer3_Website1_title }</a>
           </div>
 
         </div>
