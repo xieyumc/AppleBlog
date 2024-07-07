@@ -2,6 +2,7 @@
 import { SITE_TITLE, SITE_EMAIL } from "../consts.js";
 const { theme } = Astro.props;
 import { SITE_NAME } from "../consts.js";
+import {SITE_DESCRIPTION} from "../consts.js";
 const date = new Date();
 const year = date.getFullYear();
 ---
@@ -13,27 +14,26 @@ const year = date.getFullYear();
         <div class="foot-nav-items">
           <div class="item">
             <div class="logo">{SITE_TITLE}</div>
-            <div class="email">Email: {SITE_EMAIL}</div>
+            <div class="email">{SITE_DESCRIPTION}</div>
           </div>
 
           <div class="item products">
             <div class="item-title">导航</div>
             <a href="/" target="_blank">首页</a>
+            <a href="/archive" target="_blank">目录</a>
 
           </div>
 
           <div class="item community">
             <div class="item-title">仓库</div>
 
-            <a href="https://github.com/xieyumc/WebHomework2024" target="_blank">Github</a>
+            <a href="https://github.com/xieyumc/AppleBlog" target="_blank">Github</a>
 
           </div>
           
           <div class="item resources">
-            <div class="item-title">联系</div>
-            <a href="https://github.com/xieyumc" target="_blank">谢宇</a>
-            <a href="https://github.com/shangshan111-1" target="_blank">陈啸</a>
-            <a href="https://github.com/chikaGorge" target="_blank">申明轩</a>
+            <div class="item-title">作者</div>
+            <a href="https://github.com/xieyumc" target="_blank">宇宇</a>
           </div>
 
         </div>
@@ -41,7 +41,7 @@ const year = date.getFullYear();
       <div class="bottom">
         <div class="copyright">
           &copy; {`${year} ${SITE_NAME}`} 
-          <a href="https://github.com/xieyumc/WebHomework2024">WebHomework2024</a>
+          <a href="https://github.com/xieyumc/AppleBlog">AppleBlog</a>
         </div>
       </div>
     </div>
