@@ -1,5 +1,9 @@
 import rss, { pagesGlobToRssItems } from '@astrojs/rss';
-import { SITE_TITLE, SITE_DESCRIPTION, SITE_URL } from '../consts.js';
+import { config } from '../consts.js';
+export const SITE_TITLE = config.SITE_TITLE;
+export const SITE_DESCRIPTION = config.SITE_DESCRIPTION;
+
+import {SITE_URL } from '../consts.js';
 
 export async function get() {
   let items = await pagesGlobToRssItems(import.meta.glob('./**/*.md'));
