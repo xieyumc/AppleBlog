@@ -99,7 +99,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./
-          file: ./nginx.Dockerfile
+          file: ./nginx/nginx.Dockerfile
           tags: ${{ secrets.DOCKER_USERNAME }}/appleblog_nginx:latest
           platforms: linux/amd64,linux/arm64
           push: true
