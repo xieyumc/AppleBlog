@@ -1,12 +1,20 @@
+export const SITE_URL = "https://github.com/xieyumc/AppleBlog";
+
+
 export const SITE_TITLE = `鱼鱼幼稚园`;
 export const SITE_DESCRIPTION = '记录鱼鱼的随笔';
-export const SITE_EMAIL = 'xieyumc@gmail.com'
-export const SITE_NAME = '鱼鱼幼稚园';
-export const SITE_URL = "https://github.com/xieyumc/AppleBlog";
-export const SITE_LANG = "zh-CN";
 
 
+export const Footer1_Title = "导航";
+export const Footer1_Website1_title = "首页";
+export const Footer1_Website1_ulr = "/";
+export const Footer1_Website2_title = "目录";
+export const Footer1_Website2_ulr = "/archive";
 
-// Author, used only when author is not specified on the page, 
-// has lower priority than the author specified in the md file.// 作者信息，仅用在文章没有指定作者的时候，优先显示在 md 文件中指定的作者。
-export const SITE_AUTHOR = "谢宇";
+export const Footer2_Title = "仓库";
+export const Footer2_Website1_title = "GitHub";
+export const Footer2_Website1_ulr = "/";
+
+export const Footer3_Title = "作者";
+export const Footer3_Website1_title = "宇宇";
+export const Footer3_Website1_ulr = "https://github.com/xieyumc";

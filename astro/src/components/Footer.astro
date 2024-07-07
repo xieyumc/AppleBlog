@@ -1,8 +1,23 @@
 ---
-import { SITE_TITLE, SITE_EMAIL } from "../consts.js";
 const { theme } = Astro.props;
-import { SITE_NAME } from "../consts.js";
+
+import { SITE_TITLE } from "../consts.js";
 import {SITE_DESCRIPTION} from "../consts.js";
+
+import {Footer1_Title} from "../consts.js";
+import { Footer1_Website1_title } from "../consts.js";
+import { Footer1_Website1_ulr} from "../consts.js";
+import { Footer1_Website2_title } from "../consts.js";
+import { Footer1_Website2_ulr} from "../consts.js";
+
+import {Footer2_Title} from "../consts.js";
+import { Footer2_Website1_title } from "../consts.js";
+import { Footer2_Website1_ulr} from "../consts.js";
+
+import {Footer3_Title} from "../consts.js";
+import { Footer3_Website1_title } from "../consts.js";
+import { Footer3_Website1_ulr} from "../consts.js";
+
 const date = new Date();
 const year = date.getFullYear();
 ---
@@ -12,35 +27,35 @@ const year = date.getFullYear();
     <div class="footer-box">
       <div class="foot-nav">
         <div class="foot-nav-items">
+
           <div class="item">
             <div class="logo">{SITE_TITLE}</div>
             <div class="email">{SITE_DESCRIPTION}</div>
           </div>
 
           <div class="item products">
-            <div class="item-title">导航</div>
-            <a href="/" target="_blank">首页</a>
-            <a href="/archive" target="_blank">目录</a>
-
+            <div class="item-title">{Footer1_Title}</div>
+            <a href={ Footer1_Website1_ulr } target="_blank">{Footer1_Website1_title}</a>
+            <a href={Footer1_Website2_ulr} target="_blank">{Footer1_Website2_title}</a>
           </div>
 
           <div class="item community">
-            <div class="item-title">仓库</div>
+            <div class="item-title">{Footer2_Title}</div>
 
-            <a href="https://github.com/xieyumc/AppleBlog" target="_blank">Github</a>
+            <a href={ Footer2_Website1_ulr} target="_blank">{ Footer2_Website1_title }</a>
 
           </div>
           
           <div class="item resources">
-            <div class="item-title">作者</div>
-            <a href="https://github.com/xieyumc" target="_blank">宇宇</a>
+            <div class="item-title">{Footer3_Title}</div>
+            <a href={ Footer3_Website1_ulr} target="_blank">{ Footer3_Website1_title }</a>
           </div>
 
         </div>
       </div>
       <div class="bottom">
         <div class="copyright">
-          &copy; {`${year} ${SITE_NAME}`} 
+          &copy; {`${year} ${SITE_TITLE}`}
           <a href="https://github.com/xieyumc/AppleBlog">AppleBlog</a>
         </div>
       </div>
