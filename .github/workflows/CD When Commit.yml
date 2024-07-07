@@ -53,7 +53,7 @@ jobs:
 
       # 启动 Docker Compose 服务用于测试
       - name: Start Docker Compose services for testing
-        run:           docker-compose -f .github/workflows/GitHub Action Build Docker.yml up --build --abort-on-container-exit
+        run: docker-compose -f ".github/workflows/GitHub Action Build Docker.yml" up --build --abort-on-container-exit
 
       - name: Wait for services to be up
         run: |
