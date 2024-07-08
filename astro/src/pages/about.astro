@@ -1,5 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { config } from '../consts.js';
+export const SITE_TITLE = config.SITE_TITLE;
+export const SITE_DESCRIPTION = config.SITE_DESCRIPTION;
 ---
 
 <BaseLayout primaryTitle="关于">
@@ -15,16 +18,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </div>
       </div>
 
-      <!--<div class="archive-tag">-->
-      <!--  <h2 class="tag-header">仓库链接</h2>-->
-      <!--  <div class="tag-post-list">-->
-      <!--    <ul>-->
-      <!--      <li>-->
-      <!--        <a href="https://github.com/xieyumc/AppleBlog" target="_blank">Github</a>-->
-      <!--      </li>-->
-      <!--    </ul>-->
-      <!--  </div>-->
-      <!--</div>-->
+      <div class="archive-tag">
+        <h2 class="tag-header">{SITE_TITLE}</h2>
+        <div class="tag-post-list">
+          <ul>
+            <li>
+              {SITE_DESCRIPTION}
+            </li>
+          </ul>
+        </div>
+      </div>
 
     </div>
   </section>
