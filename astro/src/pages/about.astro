@@ -3,11 +3,18 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { config } from '../consts.js';
 export const SITE_TITLE = config.SITE_TITLE;
 export const SITE_DESCRIPTION = config.SITE_DESCRIPTION;
+
+export const Footer3_Title = config.Footer3_Title;
+export const Footer3_Website1_title = config.Footer3_Website1_title;
+export const Footer3_Website1_url = config.Footer3_Website1_url;
+
+
 ---
 
 <BaseLayout primaryTitle="关于">
   <section class="archive">
     <div class="section-content section-tag">
+
       <div class="archive-tag">
         <h2 class="tag-header">AppleBlog</h2>
         <div class="tag-post-list">
@@ -24,6 +31,17 @@ export const SITE_DESCRIPTION = config.SITE_DESCRIPTION;
           <ul>
             <li>
               {SITE_DESCRIPTION}
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="archive-tag">
+        <h2 class="tag-header">{Footer3_Title}</h2>
+        <div class="tag-post-list">
+          <ul>
+            <li>
+              <a href={ Footer3_Website1_url} target="_blank">{ Footer3_Website1_title }</a>
             </li>
           </ul>
         </div>
