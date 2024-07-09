@@ -3,13 +3,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import ArchivePostList from "../layouts/ArchivePostList.astro";
 
 let allPosts = [];
-const tags = ["山川", "湖泊", "江河", "瀑布"];
+let tags = [];
 let posts = [];
 const apiUrl = process.env.API_URL || 'http://127.0.0.1:8000/api/posts/';
+
 // Fetch posts data from the Django backend
 const fetchPosts = async () => {
   const response = await fetch(`${apiUrl}`);
   const data = await response.json();
+
   allPosts = data.map(post => ({
     url: `/posts/${post.id}`,
     frontmatter: {
@@ -20,6 +22,13 @@ const fetchPosts = async () => {
     },
     content: post.content,
   }));
+
+  // Extract unique tags
+  const allTags = new Set();
+  allPosts.forEach(post => {
+    post.frontmatter.tags.forEach(tag => allTags.add(tag));
+  });
+  tags = Array.from(allTags);
 
   // Organize posts by tags
   tags.forEach((tag) => {
