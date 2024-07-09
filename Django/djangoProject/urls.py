@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from user.views import RegisterView
 from WebConfig.views import web_config
-
+from blog.views import post_image
 
 
 urlpatterns = [
@@ -27,5 +27,12 @@ urlpatterns = [
 
     path('api/web_config', web_config, name='web_config'),
 
+    path('api/img/post/<int:post_id>/<int:image_index>/', post_image, name='post_image'),
+
 ]
 
+from django.conf import settings
+from django.conf.urls.static import static
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
