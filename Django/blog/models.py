@@ -8,7 +8,6 @@ class Post(models.Model):
 
     title = models.CharField(max_length=200)
     content = models.TextField()  # 存储Markdown内容
-    cover_image = models.ImageField(upload_to='post_images/', blank=True, null=True)  # 新增字段用于存储图片
     pub_date = models.DateTimeField('date published')
     description = models.TextField()
     author = models.CharField(max_length=100)
