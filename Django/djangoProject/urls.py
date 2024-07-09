@@ -17,7 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 from user.views import RegisterView
 from WebConfig.views import web_config
-from blog.views import post_image
+from blog.views import PostViewSet, ImageViewSet, post_image
+from django.urls import path, include
+
 
 
 urlpatterns = [
