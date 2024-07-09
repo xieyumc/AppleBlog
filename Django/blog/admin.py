@@ -7,7 +7,7 @@ from .models import Post,Image
 # 注册Post模型
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'author', 'pub_date', 'featured', 'theme')
+    list_display = ( 'title','id', 'author', 'pub_date', 'featured', 'theme')
     search_fields = ('title', 'author')
     list_filter = ('featured', 'theme', 'pub_date')
     date_hierarchy = 'pub_date'
