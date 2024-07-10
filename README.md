@@ -4,11 +4,11 @@
 # 预览
 [本人的网站](http://yuyu.pub)
 
-###### _深色模式_
-![深色模式](astro/public/preview/img.png)
-
 ###### _浅色模式_
-![浅色模式](astro/public/preview/img_1.png)
+![浅色模式](astro/public/preview/img.png)
+
+###### _深色模式_
+![深色模式](astro/public/preview/img_1.png)
 
 ###### _文章_
 ![文章](astro/public/preview/img_7.png)
