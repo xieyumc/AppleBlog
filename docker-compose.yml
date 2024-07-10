@@ -25,6 +25,7 @@ services:
       - my_network
     environment:
       - API_URL=http://backend:8000/api/posts/
+      - WEBCONFIG_API_URL=http://backend:8000/api/web_config
 
   nginx:
     image: mona233/appleblog_nginx:latest
