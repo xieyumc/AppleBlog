@@ -2,7 +2,7 @@
 
 ![项目结构简图](astro/public/preview/img_2.png)
 # 预览
-[本人的网站](yuyu.pub)
+[本人的网站](http://yuyu.pub)
 
 ###### _深色模式_
 ![深色模式](astro/public/preview/img.png)
