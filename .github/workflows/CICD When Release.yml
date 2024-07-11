@@ -74,7 +74,7 @@ jobs:
         with:
           context: ./Django
           file: ./Django/Dockerfile
-          tags: ${{ secrets.DOCKER_USERNAME }}/appleblog_backend:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/appleblog_backend:latest,${{ secrets.DOCKER_USERNAME }}/appleblog_backend:${{ github.event.release.tag_name }}
           platforms: linux/amd64,linux/arm64
           push: true
 
@@ -85,7 +85,7 @@ jobs:
         with:
           context: ./astro
           file: ./astro/Dockerfile
-          tags: ${{ secrets.DOCKER_USERNAME }}/appleblog_web:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/appleblog_web:latest,${{ secrets.DOCKER_USERNAME }}/appleblog_web:${{ github.event.release.tag_name }}
           platforms: linux/amd64,linux/arm64
           push: true
 
@@ -96,45 +96,6 @@ jobs:
         with:
           context: ./
           file: ./nginx/nginx.Dockerfile
-          tags: ${{ secrets.DOCKER_USERNAME }}/appleblog_nginx:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/appleblog_nginx:latest,${{ secrets.DOCKER_USERNAME }}/appleblog_nginx:${{ github.event.release.tag_name }}
           platforms: linux/amd64,linux/arm64
           push: true
-
-      - name: Save backend service image
-        run: docker save ${{ secrets.DOCKER_USERNAME }}/appleblog_backend:latest | gzip > appleblog_backend_latest.tar.gz
-
-      - name: Save web service image
-        run: docker save ${{ secrets.DOCKER_USERNAME }}/appleblog_web:latest | gzip > appleblog_web_latest.tar.gz
-
-      - name: Save nginx service image
-        run: docker save ${{ secrets.DOCKER_USERNAME }}/appleblog_nginx:latest | gzip > appleblog_nginx_latest.tar.gz
-
-      - name: Upload backend image to release
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./appleblog_backend_latest.tar.gz
-          asset_name: appleblog_backend_latest.tar.gz
-          asset_content_type: application/gzip
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-
-      - name: Upload web image to release
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./appleblog_web_latest.tar.gz
-          asset_name: appleblog_web_latest.tar.gz
-          asset_content_type: application/gzip
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-
-      - name: Upload nginx image to release
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ github.event.release.upload_url }}
-          asset_path: ./appleblog_nginx_latest.tar.gz
-          asset_name: appleblog_nginx_latest.tar.gz
-          asset_content_type: application/gzip
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
