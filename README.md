@@ -107,15 +107,15 @@ AppleBlog预设了2种图片格式，若要给文章插入图片请使用以下�
 
 大图片：
 ```
-<div class=“img-container”>
-<img class=“imgbig” src=“图片链接” alt=“图片描述”/>
+<div class="img-container">
+<img class="imgbig" src="图片链接" alt="图片描述"/>
 </div>
 ```
 
 小图片：
 ```
-<div class=“img-container”>
-<img class=“imgsmall” src=“图片链接” alt=“图片描述”/>
+<div class="img-container">
+<img class="imgsmall" src="图片链接" alt="图片描述"/>
 </div>
 ```
 
