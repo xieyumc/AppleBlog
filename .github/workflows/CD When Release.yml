@@ -1,0 +1,134 @@
+name: CI/CD for Docker Compose Project
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker:19.03.12
+        options: --privileged
+        ports:
+          - 80:80
+          - 8000:8000
+          - 3000:3000
+        volumes:
+          - /var/run/docker.sock:/var/run/docker.sock
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      # 构建单架构后端服务镜像用于本地测试
+      - name: Build backend service image for testing
+        run: docker build -t backend:test -f ./Django/Dockerfile ./Django
+
+      # 构建单架构前端服务镜像用于本地测试
+      - name: Build web service image for testing
+        run: docker build -t web:test -f ./astro/Dockerfile ./astro
+
+      # 构建单架构 Nginx 服务镜像用于本地测试
+      - name: Build nginx service image for testing
+        run: docker build -t nginx:test -f ./nginx/nginx.Dockerfile .
+
+      # 启动 Docker Compose 服务用于测试
+      - name: Start Docker Compose services for testing
+        run: docker-compose -f "./GitHub Action Build Docker.yml" up --build  -d
+
+      - name: Wait for services to be up
+        run: |
+          echo "Waiting for services to be up..."
+          sleep 6
+
+      - name: Run tests
+        run: |
+          curl -f http://localhost:3000
+          curl -f http://localhost:3000/posts/1
+          curl -f http://localhost:3000/archive
+          curl -f http://localhost:3000/about
+
+          curl -f http://localhost:8000/api/posts/
+          curl -f http://localhost:8000/admin/
+      
+
+      # 构建并推送多架构后端服务镜像
+      - name: Build and push multi-arch backend service image
+        if: success()
+        uses: docker/build-push-action@v2
+        with:
+          context: ./Django
+          file: ./Django/Dockerfile
+          tags: ${{ secrets.DOCKER_USERNAME }}/appleblog_backend:latest
+          platforms: linux/amd64,linux/arm64
+          push: true
+
+      # 构建并推送多架构前端服务镜像
+      - name: Build and push multi-arch web service image
+        if: success()
+        uses: docker/build-push-action@v2
+        with:
+          context: ./astro
+          file: ./astro/Dockerfile
+          tags: ${{ secrets.DOCKER_USERNAME }}/appleblog_web:latest
+          platforms: linux/amd64,linux/arm64
+          push: true
+
+      # 构建并推送多架构 Nginx 服务镜像
+      - name: Build and push multi-arch nginx service image
+        if: success()
+        uses: docker/build-push-action@v2
+        with:
+          context: ./
+          file: ./nginx/nginx.Dockerfile
+          tags: ${{ secrets.DOCKER_USERNAME }}/appleblog_nginx:latest
+          platforms: linux/amd64,linux/arm64
+          push: true
+
+      - name: Upload Docker images to release
+        if: success()
+        run: |
+          echo "Uploading Docker images to release..."
+          docker save ${{ secrets.DOCKER_USERNAME }}/appleblog_backend:latest | gzip > appleblog_backend_latest.tar.gz
+          docker save ${{ secrets.DOCKER_USERNAME }}/appleblog_web:latest | gzip > appleblog_web_latest.tar.gz
+          docker save ${{ secrets.DOCKER_USERNAME }}/appleblog_nginx:latest | gzip > appleblog_nginx_latest.tar.gz
+        id: images
+
+      - name: Upload release assets
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: appleblog_backend_latest.tar.gz
+          asset_name: appleblog_backend_latest.tar.gz
+          asset_content_type: application/gzip
+
+      - name: Upload release assets
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: appleblog_web_latest.tar.gz
+          asset_name: appleblog_web_latest.tar.gz
+          asset_content_type: application/gzip
+
+      - name: Upload release assets
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: appleblog_nginx_latest.tar.gz
+          asset_name: appleblog_nginx_latest.tar.gz
+          asset_content_type: application/gzip
