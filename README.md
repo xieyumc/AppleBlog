@@ -24,7 +24,13 @@ _AppleBlog在每个环节都适配了Docker，使用docker可以：_
 
 #### 部署非常简单，只需要2步：
 
-1.	安装好docker，下载仓库根目录里的[db.sqlite3](db.sqlite3)和[docker-compose.yml](docker-compose.yml)
+1.	安装好docker，下载仓库根目录里的[db.sqlite3](db.sqlite3)和[docker-compose.yml](docker-compose.yml)和[media](media)目录（自己创建一个也可以，目录里还需要有个子目录，也就是media/post_images），一起放在一个文件夹里  
+同一个文件夹下应该有这些文件：
+```
+db.sqlite3
+docker-compose.yml
+/media/post_images
+``` 
 
 2.	运行命令`docker-compose up`，就会从docker hub拉取镜像，自动运行，并且每分钟会自动检测是否有更新，若有更新则自动更新容器
 
