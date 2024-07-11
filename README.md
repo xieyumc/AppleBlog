@@ -3,9 +3,9 @@
 ![项目结构简图](astro/public/preview/img_2.png)
 # 特色
 * Apple风格，简约，简约的很
-* Apple Newsroom不支持深色模式，AppleBlog支持浅色和深色自动切换
-* 文章使用Markdown格式，支持图片插入
-* 两种不同风格的图片，还有特色文章
+* 微服务，Docker容器化，并且还能借助GitHub Action的cicd功能自动更新
+* Apple Newsroom不支持深色模式，但AppleBlog支持浅色和深色自动切换！
+* 两种不同风格的图片，还有特色文章的动画
 * 流畅的非线性动画，妙，非常妙
 # 预览
 [本人的网站](http://yuyu.pub)
