@@ -1,4 +1,4 @@
-name: CI/CD for Docker Compose Project
+name: Test When Commit.yml
 
 on:
   push:

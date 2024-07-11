@@ -1,4 +1,4 @@
-name: CI/CD for Docker Compose Project
+name: CICD When Release.yml
 
 on:
   release:
