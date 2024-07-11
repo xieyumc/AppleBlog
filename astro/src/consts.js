@@ -4,7 +4,7 @@ export async function getConfig() {
 
     const defaultConfig = {
         SITE_TITLE: '鱼鱼幼稚园',
-        SITE_DESCRIPTION: '记录鱼鱼的随笔',
+        SITE_DESCRIPTION: '鱼鱼的日常冒泡',
         Footer1_Title: '导航',
         Footer1_Website1_title: '首页',
         Footer1_Website1_url: '/',
@@ -14,7 +14,7 @@ export async function getConfig() {
         Footer2_Website1_title: 'GitHub',
         Footer2_Website1_url: 'https://github.com/xieyumc/AppleBlog',
         Footer3_Title: '作者',
-        Footer3_Website1_title: '宇宇',
+        Footer3_Website1_title: '鱼鱼',
         Footer3_Website1_url: 'https://github.com/xieyumc'
     };
 

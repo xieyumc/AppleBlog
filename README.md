@@ -60,6 +60,26 @@ _2. 配置nginx：nginx可以让网站从80端口直接访问，并加快网站�
 `localhost:3000`即可打开网站,  
 `localhost:8000/admin`是管理后台，账号密码都是admin（请登录后自行修改）
 
+# 修改网站标题和脚注
+进入管理界面，打开`Web configs`，可以看到我已经预设好了配置，只需要对比网页和数据库的配置，修改即可：
+```
+        SITE_TITLE: '鱼鱼幼稚园',
+        SITE_DESCRIPTION: '鱼鱼的日常冒泡',
+        Footer1_Title: '导航',
+        Footer1_Website1_title: '首页',
+        Footer1_Website1_url: '/',
+        Footer1_Website2_title: '目录',
+        Footer1_Website2_url: '/archive',
+        Footer2_Title: '仓库',
+        Footer2_Website1_title: 'GitHub',
+        Footer2_Website1_url: 'https://github.com/xieyumc/AppleBlog',
+        Footer3_Title: '作者',
+        Footer3_Website1_title: '鱼鱼',
+        Footer3_Website1_url: 'https://github.com/xieyumc'
+```
+
+修改完必须重启前端才会生效，  
+`docker-compose down`关闭容器，`docker-compose up`重新启动
 # 编辑文章
 打开管理后台，点击`文章`，点击`添加文章`，填写文章信息
 ![img_4.png](astro/public/preview/img_4.png)
