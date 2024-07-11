@@ -29,7 +29,7 @@ _AppleBlog在每个环节都适配了Docker，使用docker可以：_
 ```
 db.sqlite3
 docker-compose.yml
-/media/post_images
+media/post_images
 ``` 
 
 2.	运行命令`docker-compose up`，就会从docker hub拉取镜像，自动运行，并且每分钟会自动检测是否有更新，若有更新则自动更新容器
@@ -119,6 +119,6 @@ http://100.1.1.1:8000/api/img/post/1/1/
 ```
 这样就是插入了第一篇文章的第一张图片
 
-注意⚠️，这里的ip地址会被用户前端直接访问，所以ip地址请填写服务器ip，而不是localhost
+**注意⚠️，这里的ip地址会被用户前端直接访问，所以ip地址请填写服务器ip，而不是localhost**
 
 后端图床功能完全独立，所以甚至可以把后端图床部署到国内服务器，AppleBlog部署到国外服务器，这样可以加快图片访问速度，又不需要国内网站备案
