@@ -117,7 +117,7 @@ jobs:
           asset_name: appleblog_backend_latest.tar.gz
           asset_content_type: application/gzip
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
       - name: Upload web image to release
         uses: actions/upload-release-asset@v1
@@ -127,7 +127,7 @@ jobs:
           asset_name: appleblog_web_latest.tar.gz
           asset_content_type: application/gzip
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
 
       - name: Upload nginx image to release
         uses: actions/upload-release-asset@v1
@@ -137,4 +137,4 @@ jobs:
           asset_name: appleblog_nginx_latest.tar.gz
           asset_content_type: application/gzip
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
