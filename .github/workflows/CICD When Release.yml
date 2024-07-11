@@ -100,35 +100,41 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
 
-      - name: Upload Docker images to release
-        if: success()
-        run: |
-          echo "Uploading Docker images to release..."
-          docker save ${{ secrets.DOCKER_USERNAME }}/appleblog_backend:latest | gzip > appleblog_backend_latest.tar.gz
-          docker save ${{ secrets.DOCKER_USERNAME }}/appleblog_web:latest | gzip > appleblog_web_latest.tar.gz
-          docker save ${{ secrets.DOCKER_USERNAME }}/appleblog_nginx:latest | gzip > appleblog_nginx_latest.tar.gz
-        id: images
+      - name: Save backend service image
+        run: docker save ${{ secrets.DOCKER_USERNAME }}/appleblog_backend:latest | gzip > appleblog_backend_latest.tar.gz
 
-      - name: Upload release assets
+      - name: Save web service image
+        run: docker save ${{ secrets.DOCKER_USERNAME }}/appleblog_web:latest | gzip > appleblog_web_latest.tar.gz
+
+      - name: Save nginx service image
+        run: docker save ${{ secrets.DOCKER_USERNAME }}/appleblog_nginx:latest | gzip > appleblog_nginx_latest.tar.gz
+
+      - name: Upload backend image to release
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: appleblog_backend_latest.tar.gz
+          asset_path: ./appleblog_backend_latest.tar.gz
           asset_name: appleblog_backend_latest.tar.gz
           asset_content_type: application/gzip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload release assets
+      - name: Upload web image to release
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: appleblog_web_latest.tar.gz
+          asset_path: ./appleblog_web_latest.tar.gz
           asset_name: appleblog_web_latest.tar.gz
           asset_content_type: application/gzip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload release assets
+      - name: Upload nginx image to release
         uses: actions/upload-release-asset@v1
         with:
           upload_url: ${{ github.event.release.upload_url }}
-          asset_path: appleblog_nginx_latest.tar.gz
+          asset_path: ./appleblog_nginx_latest.tar.gz
           asset_name: appleblog_nginx_latest.tar.gz
           asset_content_type: application/gzip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
