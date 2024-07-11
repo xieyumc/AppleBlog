@@ -12,7 +12,7 @@ services:
       - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,backend,SERVER_NAME
     volumes:
       - ./db.sqlite3:/app/db.sqlite3
-      - ./media/post_images:/app/Django/media/post_images
+      - ./media/post_images:/app/media/post_images
 
 
   web:
