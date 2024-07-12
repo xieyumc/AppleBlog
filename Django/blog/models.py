@@ -2,7 +2,7 @@ from django.db import models
 
 class Post(models.Model):
     THEME_CHOICES = (
-        ('light', 'Light'),
+        ('light', 'AUTO'),
         ('dark', 'Dark'),
     )
 
