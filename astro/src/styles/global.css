@@ -7520,15 +7520,26 @@ blockquote p {
 }
 .container {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   color: white;
   height: 100vh;
+  overflow: hidden; /* 确保容器不溢出 */
 }
+
 .background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  z-index: 0;
 }
+
 .container::before {
   content: "";
   position: absolute;
@@ -7539,44 +7550,43 @@ blockquote p {
   background: rgba(0, 0, 0, 0.5); /* 半透明背景层 */
   z-index: 1;
 }
+
 .centered-text, .sub-text {
-  position: absolute;
+  position: relative;
   z-index: 1; /* 确保文字在背景层之上 */
   opacity: 0; /* 初始状态透明 */
   animation: slideUp 1s forwards; /* 应用动画 */
-  left: 50%; /* 保持水平居中 */
-  transform: translateX(-50%); /* 保持水平居中 */
+  text-align: center; /* 确保文本内容居中 */
 }
+
+
 .centered-text {
-  top: 30%;
   font-size: 64px;
   font-weight: 700;
   font-family: "SF Pro SC", "SF Pro Display", "SF Pro Icons", "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   line-height: 1.09375;
   letter-spacing: 0em;
-  text-align: center;
-  animation-delay: 0.5s; /* 动画延迟，给子文本动画 */
+  animation-delay: 0.5s; /* 动画延迟 */
+  margin-top: -20%;
 }
+
 .sub-text {
-  top: 45%;
-  margin-inline-start: auto;
-  margin-inline-end: auto;
+  margin-top: 40px; /* 为子文本添加一些顶部间隔 */
   font-size: 24px;
   line-height: 1.1666666667;
   font-weight: 600;
   letter-spacing: .009em;
   font-family: "SF Pro Display", "SF Pro Icons", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
   width: 66.6666666667%;
-  animation-delay: 1s; /* 动画延迟，给主文本动画 */
+  animation-delay: 1s; /* 动画延迟 */
 }
-
 @keyframes slideUp {
   from {
-    transform: translate(-50%, 50px); /* 从下往上移动，并保持水平居中 */
-    opacity: 0; /* 初始透明 */
+    opacity: 0;
+    transform: translateY(20px);
   }
   to {
-    transform: translate(-50%, 0); /* 最终位置 */
-    opacity: 1; /* 最终不透明 */
+    opacity: 1;
+    transform: translateY(0);
   }
 }
