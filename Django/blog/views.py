@@ -8,6 +8,9 @@ class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
+    def get_queryset(self):
+        return Post.objects.filter(available=True)
+
 # 用于提供文章图片的视图函数
 class ImageViewSet(viewsets.ModelViewSet):
     queryset = Image.objects.all()

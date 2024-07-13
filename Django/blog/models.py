@@ -5,7 +5,7 @@ class Post(models.Model):
         ('light', 'AUTO'),
         ('dark', 'Dark'),
     )
-
+    available = models.BooleanField(default=True)  # 用于标记文章是否可见
     title = models.CharField(max_length=200)
     description = models.TextField()
     content = models.TextField()  # 存储Markdown内容
