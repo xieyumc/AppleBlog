@@ -48,6 +48,7 @@ export const SITE_TITLE = config.SITE_TITLE;
 const contentHtml = marked(post.content || '');
 ---
 <title>{`${post.title} — ${SITE_TITLE}`}</title>
+<link rel="icon" href="../../../public/favicon.png" type="image/x-icon" />
 
 <MarkdownPost frontmatter={frontmatter}>
     {post.featured && (
