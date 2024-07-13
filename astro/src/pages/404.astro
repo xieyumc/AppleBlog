@@ -1,7 +1,12 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { config } from '../consts.js';
+
 import ArchivePostList from "../layouts/ArchivePostList.astro";
+export const SITE_TITLE = config.SITE_TITLE;
+
 ---
+<title>{`404 — ${SITE_TITLE}`}</title>
 
 <BaseLayout primaryTitle="404 Not Found">
   <section class="archive">

@@ -2,6 +2,8 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Tile from "../layouts/Tile.astro";
 import MoreTile from "../layouts/MoreTile.astro";
+import { config } from '../consts.js';
+
 // 动态获取文章数据
 let allPosts = [];
 
@@ -23,9 +25,11 @@ const fetchPosts = async () => {
   }));
   allPosts.sort((a, b) => Date.parse(b.frontmatter.pubDate) - Date.parse(a.frontmatter.pubDate));
 };
+export const SITE_TITLE = config.SITE_TITLE;
 
 await fetchPosts();
 ---
+<title>{`首页 — ${SITE_TITLE}`}</title>
 
 <BaseLayout>
 

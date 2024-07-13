@@ -1,8 +1,9 @@
 ---
 // 导入所需的模块和组件
+import { config } from '../../consts.js';
+
 import MarkdownPost from "../../../src/layouts/MarkdownPostFor[id].astro";
 import { marked } from 'marked';
-
 // 获取文章 ID
 const { id } = Astro.params;
 
@@ -41,9 +42,12 @@ const frontmatter = {
     theme: post.theme || 'light',
     cover: { url: post.cover_url || '' },
 };
+export const SITE_TITLE = config.SITE_TITLE;
+
 
 const contentHtml = marked(post.content || '');
 ---
+<title>{`${post.title} — ${SITE_TITLE}`}</title>
 
 <MarkdownPost frontmatter={frontmatter}>
     {post.featured && (

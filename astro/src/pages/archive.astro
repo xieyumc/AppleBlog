@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import ArchivePostList from "../layouts/ArchivePostList.astro";
+import { config } from '../consts.js';
 
 let allPosts = [];
 let tags = [];
@@ -36,9 +37,11 @@ const fetchPosts = async () => {
     posts.push(filteredPosts);
   });
 };
+export const SITE_TITLE = config.SITE_TITLE;
 
 await fetchPosts();
 ---
+<title>{`目录 — ${SITE_TITLE}`}</title>
 
 <BaseLayout primaryTitle="归档">
   <section class="archive">
