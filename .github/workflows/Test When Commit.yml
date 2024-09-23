@@ -24,6 +24,12 @@ jobs:
           - /var/run/docker.sock:/var/run/docker.sock
 
     steps:
+      - name: Install Docker Compose
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y docker-compose
+          docker-compose --version
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -53,7 +59,7 @@ jobs:
 
       # 启动 Docker Compose 服务用于测试
       - name: Start Docker Compose services for testing
-        run: docker-compose -f "./GitHub Action Build Docker.yml" up --build  -d
+        run: docker compose -f "./GitHub Action Build Docker.yml" up --build  -d
 
       - name: Wait for services to be up
         run: |
