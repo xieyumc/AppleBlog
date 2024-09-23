@@ -23,18 +23,18 @@ services:
     environment:
       - API_URL=http://backend:8000/api/posts/
 
-  nginx:
-    image: nginx:latest
-    container_name: nginx
-    volumes:
-      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
-    ports:
-      - "80:80"
-    depends_on:
-      - web
-      - backend
-    networks:
-      - my_network
+#  nginx:
+#    image: nginx:latest
+#    container_name: nginx
+#    volumes:
+#      - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+#    ports:
+#      - "80:80"
+#    depends_on:
+#      - web
+#      - backend
+#    networks:
+#      - my_network
 
 
 
