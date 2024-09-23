@@ -47,9 +47,9 @@ jobs:
       - name: Build web service image for testing
         run: docker build -t web:test -f ./astro/Dockerfile ./astro
 
-      # 构建单架构 Nginx 服务镜像用于本地测试
-      - name: Build nginx service image for testing
-        run: docker build -t nginx:test -f ./nginx/nginx.Dockerfile .
+#      # 构建单架构 Nginx 服务镜像用于本地测试
+#      - name: Build nginx service image for testing
+#        run: docker build -t nginx:test -f ./nginx/nginx.Dockerfile .
 
       # 启动 Docker Compose 服务用于测试
       - name: Start Docker Compose services for testing

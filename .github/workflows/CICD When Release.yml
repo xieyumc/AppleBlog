@@ -43,9 +43,9 @@ jobs:
       - name: Build web service image for testing
         run: docker build -t web:test -f ./astro/Dockerfile ./astro
 
-      # 构建单架构 Nginx 服务镜像用于本地测试
-      - name: Build nginx service image for testing
-        run: docker build -t nginx:test -f ./nginx/nginx.Dockerfile .
+#      # 构建单架构 Nginx 服务镜像用于本地测试
+#      - name: Build nginx service image for testing
+#        run: docker build -t nginx:test -f ./nginx/nginx.Dockerfile .
 
       # 启动 Docker Compose 服务用于测试
       - name: Start Docker Compose services for testing
@@ -89,13 +89,13 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
 
-      # 构建并推送多架构 Nginx 服务镜像
-      - name: Build and push multi-arch nginx service image
-        if: success()
-        uses: docker/build-push-action@v2
-        with:
-          context: ./
-          file: ./nginx/nginx.Dockerfile
-          tags: ${{ secrets.DOCKER_USERNAME }}/appleblog_nginx:latest,${{ secrets.DOCKER_USERNAME }}/appleblog_nginx:${{ github.event.release.tag_name }}
-          platforms: linux/amd64,linux/arm64
-          push: true
+#      # 构建并推送多架构 Nginx 服务镜像
+#      - name: Build and push multi-arch nginx service image
+#        if: success()
+#        uses: docker/build-push-action@v2
+#        with:
+#          context: ./
+#          file: ./nginx/nginx.Dockerfile
+#          tags: ${{ secrets.DOCKER_USERNAME }}/appleblog_nginx:latest,${{ secrets.DOCKER_USERNAME }}/appleblog_nginx:${{ github.event.release.tag_name }}
+#          platforms: linux/amd64,linux/arm64
+#          push: true
