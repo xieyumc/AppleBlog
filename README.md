@@ -44,7 +44,7 @@ media/post_images
 _1. 允许从公网访问管理后台：出于安全原因，管理后台只允许本地访问，如果想从公网访问便于管理，替换 `docker-compose.yml `中 `backend `容器   `- DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,backend,SERVER_NAME`
    中的`SERVER_NAME`为你的服务器域名_    
 
-_2. 配置nginx：nginx可以让网站从80端口直接访问，并加快网站请求速度，AppleBlog已经写好了nginx的配置文件，详细请查看nginx的文件夹，请自行配置nginx_
+_2. 配置nginx：nginx可以让网站从80端口直接访问，并加快网站请求速度，AppleBlog已经写好了nginx的配置文件，详细请查看nginx的文件夹，需要运行请在配置文件里增加你自己的服务器地址，里面有一个docker-compose.yml，可以直接运行`docker-compose up`运行nginx_
 
 ### 从源码部署
 当然，也可以从源码部署
