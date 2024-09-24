@@ -10,7 +10,7 @@ jobs:
 
     services:
       docker:
-        image: docker
+        image: docker:latest
         options: --privileged
         ports:
           - 80:80
