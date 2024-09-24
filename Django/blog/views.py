@@ -3,6 +3,10 @@ from django.http import HttpResponse
 from rest_framework import viewsets
 from .models import Post, Image
 from .serializers import PostSerializer, ImageSerializer
+import mimetypes
+from django.http import HttpResponse
+from django.shortcuts import get_object_or_404
+
 # 用于处理文章的常规CRUD操作
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
@@ -22,7 +26,12 @@ def post_image(request, post_id, image_index):
     image_index -= 1  # 使索引从1开始计数
     if images and 0 <= image_index < len(images):
         image = images[image_index]
-        with open(image.image.path, 'rb') as f:
-            return HttpResponse(f.read(), content_type="image/jpeg")
+        image_path = image.image.path
+        # 自动检测文件的 MIME 类型
+        mime_type, _ = mimetypes.guess_type(image_path)
+        if not mime_type:
+            mime_type = "application/octet-stream"  # 当类型无法识别时使用默认类型
+        with open(image_path, 'rb') as f:
+            return HttpResponse(f.read(), content_type=mime_type)
     else:
         return HttpResponse(status=404)
