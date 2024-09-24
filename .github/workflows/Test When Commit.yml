@@ -66,6 +66,11 @@ jobs:
           echo "Waiting for services to be up..."
           sleep 10
 
+      - name: Check logs
+        run: |
+          docker compose logs backend
+          docker compose logs web
+
       - name: Run tests
         run: |
           curl -f http://localhost:3000
