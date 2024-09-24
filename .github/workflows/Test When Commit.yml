@@ -77,6 +77,8 @@ jobs:
           curl -f http://localhost:3000/posts/1
           curl -f http://localhost:3000/archive
           curl -f http://localhost:3000/about
-
+          
+          
+          curl -f http://localhost:8000/admin
           curl -f http://localhost:8000/api/posts/
           curl -f http://localhost:8000/api/web_config
