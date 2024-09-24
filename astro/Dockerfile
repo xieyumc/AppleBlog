@@ -24,4 +24,4 @@ ARG API_URL
 ENV API_URL=${API_URL}
 
 # 启动项目
-CMD ["npm", "run", "dev", "--", "--host"]
+CMD ["npm", "run", "start", "--", "--host"]
