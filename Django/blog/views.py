@@ -32,6 +32,9 @@ def post_image(request, post_id, image_index):
         if not mime_type:
             mime_type = "application/octet-stream"  # 当类型无法识别时使用默认类型
         with open(image_path, 'rb') as f:
-            return HttpResponse(f.read(), content_type=mime_type)
+            response = HttpResponse(f.read(), content_type=mime_type)
+            # 设置缓存头，缓存30天
+            response['Cache-Control'] = 'public, max-age=2592000'
+            return response
     else:
         return HttpResponse(status=404)
