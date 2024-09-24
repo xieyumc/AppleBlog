@@ -18,7 +18,8 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
 class Image(models.Model):
     post = models.ForeignKey(Post, related_name='images', on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='post_images/')
+    image = models.FileField(upload_to='post_images/')
     alt_text = models.CharField(max_length=255, blank=True, null=True)
