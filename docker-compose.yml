@@ -15,8 +15,11 @@ services:
       - POSTGRES_PASSWORD=pYrdip-kevset-mihby2
       - POSTGRES_HOST=db
       - POSTGRES_PORT=5432
+      - REDIS_HOST=redis  # Redis 容器名称
+      - REDIS_PORT=6379   # Redis 内部端口
     depends_on:
       - db
+      - redis  # 添加对 redis 的依赖
     volumes:
       - ./media/post_images:/app/media/post_images
 
@@ -40,9 +43,14 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=pYrdip-kevset-mihby2
-
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      - appleblog_network
+
+  redis:
+    image: redis:latest  # 使用官方 Redis 镜像
+    container_name: redis
     networks:
       - appleblog_network
 

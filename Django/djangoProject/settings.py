@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import redis
 
 
 
@@ -109,6 +110,28 @@ DATABASES = {
     }
 
 }
+
+# Redis 相关设置，从环境变量中读取配置，并设置默认值
+REDIS_HOST = os.environ.get('REDIS_HOST', 'localhost')  # 默认是本地
+REDIS_PORT = os.environ.get('REDIS_PORT', 6379)  # 默认端口为6379
+REDIS_DB = os.environ.get('REDIS_DB', 0)  # 默认 Redis 数据库为 0
+REDIS_URL = f'redis://{REDIS_HOST}:{REDIS_PORT}/{REDIS_DB}'
+
+# CACHES 配置，将 Redis 用作缓存后端
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': REDIS_URL,
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
+
+# 将会话存储到 Redis 中
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
+SESSION_CACHE_ALIAS = 'default'
+
 
 
 # Password validation
