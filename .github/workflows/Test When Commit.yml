@@ -61,6 +61,16 @@ jobs:
       - name: Start Docker Compose services for testing
         run: docker compose -f "./GitHub Action Build Docker.yml" up --build  -d
 
+
+      - name: Wait for services to be up
+        run: |
+          echo "Waiting for services to be up..."
+          sleep 5
+
+      - name: Load database fixtures
+        run: |
+            docker compose exec backend python manage.py loaddata db.json
+
       - name: Wait for services to be up
         run: |
           echo "Waiting for services to be up..."
