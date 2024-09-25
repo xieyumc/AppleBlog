@@ -30,10 +30,10 @@ _AppleBlog在每个环节都适配了Docker，使用docker可以：_
 
 #### 部署非常简单，只需要2步：
 
-1.	安装好docker，下载仓库根目录里的[db.sqlite3](db.sqlite3)和[docker-compose.yml](docker-compose.yml)和[media](media)目录（自己创建一个也可以，目录里还需要有个子目录，也就是media/post_images），一起放在一个文件夹里  
-同一个文件夹下应该有这些文件：
+1.	安装好docker，下载仓库根目录里的[postgres_data](postgres_data)文件夹和[docker-compose.yml](docker-compose.yml)和[media](media)目录（自己创建一个也可以，目录里还需要有个子目录，也就是media/post_images），一起放在一个文件夹里  
+同一个文件夹下应该有这些：
 ```
-db.sqlite3
+postgres_data
 docker-compose.yml
 media/post_images
 ``` 
@@ -50,6 +50,22 @@ _2. 配置nginx（推荐）：nginx可以让网站从80端口直接访问，并�
 
 ### 从源码部署
 当然，也可以从源码部署
+
+#### postgresql
+
+请自行安装postgresql，并且创建一个数据库
+数据库的配置如下：
+```
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('POSTGRES_DB', 'postgres'),
+        'USER': os.environ.get('POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'pYrdip-kevset-mihby2'),
+        'HOST': os.environ.get('POSTGRES_HOST', '127.0.0.1'),
+        'PORT': os.environ.get('POSTGRES_PORT', '5433'),
+    }
+```
+
 #### Astro
 1.	安装nodejs
 2. 进入astro文件夹，`npm install`安装依赖

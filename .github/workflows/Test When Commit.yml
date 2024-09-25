@@ -70,6 +70,7 @@ jobs:
         run: |
           docker compose logs backend
           docker compose logs web
+          docker compose logs db
 
       - name: Run tests
         run: |
