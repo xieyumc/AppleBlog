@@ -44,22 +44,24 @@ db.json
 3. 第一次运行你会发现数据库没有数据而运行失败，这时候需要导入初始数据库，执行以下命令：
 
 ```
-docker compose exec backend python manage.py makemigrations
+docker cp ./db.json backend:/app/
 
-docker compose exec backend python manage.py migrate
+docker-compose exec backend python manage.py makemigrations
 
-docker compose exec backend python manage.py loaddata db.json
+docker-compose exec backend python manage.py migrate
+
+docker-compose exec backend python manage.py loaddata db.json
 ```
 4. 然后重启容器，`docker-compose restart`，就可以正常运行了
 
 
 #### 可选功能：
-_1. 允许从公网访问管理后台：出于安全原因，管理后台只允许本地访问，如果想从公网访问便于管理，替换 `docker-compose.yml `中 `backend `容器   `- DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,backend,SERVER_NAME`
-   中的`SERVER_NAME`为你的服务器域名_    
+1. 允许从公网访问管理后台：出于安全原因，管理后台只允许本地访问，如果想从公网访问便于管理，替换 `docker-compose.yml `中 `backend `容器   `- DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,backend,SERVER_NAME`
+   中的`SERVER_NAME`为你的服务器域名
 
-_2. 配置nginx（推荐）：nginx可以让网站从80端口直接访问，并加快网站请求速度，AppleBlog已经写好了nginx的配置文件，并且对于常见的压缩请求，图片缓存等做了适配，可以让网站打开速度快几倍，推荐部署   
+2. 配置nginx（推荐）：nginx可以让网站从80端口直接访问，并加快网站请求速度，AppleBlog已经写好了nginx的配置文件，并且对于常见的压缩请求，图片缓存等做了适配，可以让网站打开速度快几倍，推荐部署   
 
-详细请查看nginx的文件夹，需要运行请在配置文件里增加你自己的服务器地址，里面有一个docker-compose.yml，可以直接运行`docker-compose up`运行nginx_
+   详细请查看nginx的文件夹，需要运行请在配置文件里增加你自己的服务器地址，里面有一个docker-compose.yml，可以直接运行`docker-compose up`运行nginx
 
 ### 从源码部署
 当然，也可以从源码部署
