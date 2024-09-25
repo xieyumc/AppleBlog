@@ -83,6 +83,10 @@ jobs:
         run: |
             docker compose exec backend python manage.py loaddata db.json
 
+      # 重启 Docker Compose 容器
+      - name: Restart Docker Compose services
+        run: docker compose restart
+
       - name: Wait for services to be up
         run: |
           echo "Waiting for services to be up..."
