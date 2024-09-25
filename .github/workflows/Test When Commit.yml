@@ -67,6 +67,12 @@ jobs:
           echo "Waiting for services to be up..."
           sleep 5
 
+      - name: Check logs
+        run: |
+          docker compose logs backend
+          docker compose logs web
+          docker compose logs db
+
       - name: Load database fixtures
         run: |
             docker compose exec backend python manage.py loaddata db.json
