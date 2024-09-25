@@ -2,14 +2,24 @@ version: '3.8'
 
 services:
 
-
   backend:
     build: Django
     container_name: backend
     ports:
       - "8000:8000"
     networks:
-      - my_network
+      - appleblog_network
+    environment:
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,backend,SERVER_NAME
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pYrdip-kevset-mihby2
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5433
+    depends_on:
+      - db
+    volumes:
+      - ./media/post_images:/app/media/post_images
 
   web:
     build: astro
@@ -19,10 +29,27 @@ services:
     depends_on:
       - backend
     networks:
-      - my_network
+      - appleblog_network
     environment:
       - API_URL=http://backend:8000/api/posts/
 
+  db:
+    image: postgres:latest
+    container_name: db
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=pYrdip-kevset-mihby2
+    ports:
+      - "5433:5432"  
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      - appleblog_network
+
 networks:
-  my_network:
+  appleblog_network:
     driver: bridge
+
+volumes:
+  postgres_data:
