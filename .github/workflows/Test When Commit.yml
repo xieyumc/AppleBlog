@@ -73,6 +73,12 @@ jobs:
           docker compose logs web
           docker compose logs db
 
+      # 执行数据库迁移
+      - name: Apply database migrations
+        run: |
+          docker compose exec backend python manage.py makemigrations
+          docker compose exec backend python manage.py migrate
+
       - name: Load database fixtures
         run: |
             docker compose exec backend python manage.py loaddata db.json

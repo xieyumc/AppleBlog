@@ -14,7 +14,7 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=pYrdip-kevset-mihby2
       - POSTGRES_HOST=db
-      - POSTGRES_PORT=5433
+      - POSTGRES_PORT=5432
     depends_on:
       - db
     volumes:
@@ -40,8 +40,7 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=pYrdip-kevset-mihby2
-    ports:
-      - "5433:5432"  # 将容器内的5432端口映射到宿主机的5433端口
+
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
     networks:
