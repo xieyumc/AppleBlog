@@ -5,4 +5,4 @@ sqlparse==0.5.0
 djangorestframework
 gunicorn
 Pillow
-psycopg2
+psycopg2-binary
