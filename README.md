@@ -28,17 +28,30 @@ _AppleBlog在每个环节都适配了Docker，使用docker可以：_
 3. 容器自动更新
 
 
-#### 部署非常简单，只需要2步：
+#### 部署非常简单：
 
-1.	安装好docker，下载仓库根目录里的[postgres_data](postgres_data)文件夹和[docker-compose.yml](docker-compose.yml)和[media](media)目录（自己创建一个也可以，目录里还需要有个子目录，也就是media/post_images），一起放在一个文件夹里  
+1.	安装好docker，下载仓库根目录里的[postgres_data](postgres_data)文件夹和[docker-compose.yml](docker-compose.yml)和[media](media)目录（自己创建一个也可以，目录里还需要有个子目录，也就是media/post_images）[db.json](Django/db.json)初始数据库文件，一起放在一个文件夹里  
 同一个文件夹下应该有这些：
 ```
 postgres_data
 docker-compose.yml
 media/post_images
+db.json
 ``` 
 
 2.	运行命令`docker-compose up`，就会从docker hub拉取镜像，自动运行，并且每分钟会自动检测是否有更新，若有更新则自动更新容器
+
+3. 第一次运行你会发现数据库没有数据而运行失败，这时候需要导入初始数据库，执行以下命令：
+
+```
+docker compose exec backend python manage.py makemigrations
+
+docker compose exec backend python manage.py migrate
+
+docker compose exec backend python manage.py loaddata db.json
+```
+4. 然后重启容器，`docker-compose restart`，就可以正常运行了
+
 
 #### 可选功能：
 _1. 允许从公网访问管理后台：出于安全原因，管理后台只允许本地访问，如果想从公网访问便于管理，替换 `docker-compose.yml `中 `backend `容器   `- DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,backend,SERVER_NAME`
@@ -75,6 +88,15 @@ _2. 配置nginx（推荐）：nginx可以让网站从80端口直接访问，并�
 1.	安装python
 2. 进入Django文件夹，运行`pip install -r requirements.txt`安装依赖
 3. 运行`python manage.py runserver`运行后端
+
+初始化数据库：
+```
+python manage.py makemigrations
+
+python manage.py migrate
+
+python manage.py loaddata db.json
+```
 
 # 运行
 
