@@ -193,6 +193,35 @@ http://100.1.1.1:8000/api/img/post/1/1/
 
 后端图床功能完全独立，所以甚至可以把后端图床部署到国内服务器，AppleBlog部署到国外服务器，这样可以加快图片访问速度，又不需要国内网站备案
 
+# 配置nginx实现http/3以及https
+可以参考以下配置
+```
+# HTTPS for yuyu.pub
+    server {
+        listen 443 ssl;
+        listen 443 quic;
+        http2 on;
+
+        listen [::]:443 quic;
+
+        server_name yuyu.pub;
+
+        ssl_certificate /etc/nginx/certs/yuyu.pub.pem;
+        ssl_certificate_key /etc/nginx/certs/yuyu.pub.key;
+        ssl_protocols TLSv1.2 TLSv1.3;
+        ssl_ciphers HIGH:!aNULL:!MD5;
+
+        location / {
+            proxy_pass http://127.0.0.1:3000;
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $remote_addr;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_set_header X-Forwarded-Proto $scheme;
+            add_header Alt-Svc 'h3=":443"; ma=86400';
+        }
+    }
+```
+
 # 联系
 如果喜欢这个博客，欢迎star🥰  
 
